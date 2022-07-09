@@ -12,7 +12,8 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
-const closeModal = document.getElementById("closeModal");
+const btnClose = document.getElementById("closeModal");
+const content = document.getElementById("content");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -23,9 +24,11 @@ function launchModal() {
 }
 
 // close modal
-closeModal.addEventListener("click", () => {
+btnClose.addEventListener("click", closeModal);
+
+function closeModal() {
   modalbg.style.display = "none";
-})
+}
 
 
 
@@ -54,6 +57,8 @@ firstname.addEventListener("change", function(event) {
     errorFirstname.textContent = ""
   }  
 });
+
+
 
 function isFirstNameValid(){
   if(firstname.value.length < 2){
@@ -136,11 +141,13 @@ email.addEventListener("change", function(event) {
 
 function isEmailValid(){
   if(!email.value.match(emailRegex)){
-    errorEmail.textContent = "Adresse email non valide"
+    errorEmail.textContent = "Adresse email non valide";
+    return false;
   }
   // Sinon
   else{
-    errorEmail.textContent = ""
+    errorEmail.textContent = "";
+    return true;
   }  
 }
 
@@ -191,7 +198,7 @@ let errorQuantity = document.getElementById("error-quantity")
 // Au click sur l'input
 quantity.addEventListener("change", function(event){
   if(isNaN(event.target.value) || event.target.value == ''){
-    errorQuantity.textContent = "Veuillez saisir une valeur numérique."
+    errorQuantity.textContent = "Veuillez saisir une valeur numérique.";
   }
   else{
     errorQuantity.textContent = ""
@@ -200,10 +207,12 @@ quantity.addEventListener("change", function(event){
 
 function isQuantityValid(){
   if(isNaN(quantity.value) || quantity.value == ''){
-    errorQuantity.textContent = "Veuillez saisir une valeur numérique."
+    errorQuantity.textContent = "Veuillez saisir une valeur numérique.";
+    return false;
   }
   else{
-    errorQuantity.textContent = ""
+    errorQuantity.textContent = "";
+    return true;
   }
 }
 
@@ -249,10 +258,11 @@ function isConditionAccepted(){
   
 
 
-
+// VALIDER LE FORMULAIRE
 
 function validate(event) {
   event.preventDefault(); // on retire la fonction par défaut de l'envoie du formulaire
+  
   
   setTimeout(function() {  // on créé un event loop avec set Timeout pour que le code s'exécute en asynchrone
     isFirstNameValid()
@@ -264,15 +274,35 @@ function validate(event) {
     isConditionAccepted(), 0;
    
   
-  if(isFirstNameValid() && isLastNameValid() && isEmailValid() && isQuantityValid() && isCityValid() && isConditionAccepted()) {
+  if(isFirstNameValid()) {
     console.log("le formulaire valide ");
-    return true
+    thanks();
+    
+    
+  return true
   }
   else{
     return false
   }
 }
 
+
+// AFFICHER LE MESSAGE DE REMERCIEMENT
+
+function thanks(){
+  let form = document.querySelectorAll("form fieldset, form p");
+  let formBtn = document.getElementById("formBtn");
+  let msgThanks = document.getElementById("thanks-message");
+
+
+  for( elements of form){
+    elements.style.visibility = "hidden"
+  }  
+
+  formBtn.value = "fermer";
+  formBtn.addEventListener("click", (closeModal))
+  msgThanks.style.visibility = "visible"
+}
 
 
 

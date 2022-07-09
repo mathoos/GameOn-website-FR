@@ -168,6 +168,10 @@ main {
   background-color: rgba(26, 39, 156, 0.4);
 }
 
+.remove-modal{
+  background-color: yellow;
+}
+
 .content {
   margin: 5% auto;
   width: 100%;
@@ -180,6 +184,33 @@ main {
   position: relative;
   color: #fff;
   padding-top: 10px;
+}
+
+.content-close{
+  animation-name: modalclosed;
+  animation-duration: var(--modal-duration);
+  animation-fill-mode: forwards;
+}
+
+@keyframes modalopen {
+  from {
+    opacity: 0;
+    transform: translateY(-150px);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalclosed {
+  from {
+    opacity: 1;
+    
+  }
+  to {
+    opacity: 0;
+    transform: translateY(150px);
+  }
 }
 
 .modal-body {
@@ -524,13 +555,16 @@ footer {
   }
 }
 
-@keyframes modalopen {
-  from {
-    opacity: 0;
-    transform: translateY(-150px);
-  }
-  to {
-    opacity: 1;
-  }
+
+
+
+#thanks-message{
+  position : absolute;
+  top : 50%;
+  left : 50%;
+  transform : translate(-50%, -50%);
+  text-align : center;
+  font-size : 1.8rem;
+  visibility : hidden;
 }
 
