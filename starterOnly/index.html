@@ -94,7 +94,6 @@
               <fieldset class="formData">
                 <label for="birthdate">Date de naissance</label><br>
                 <input class="text-control" type="date" id="birthdate" name="birthdate"/><br>
-                <span class="error-message" id="error-birthdate"></span>
               </fieldset>
 
               <fieldset class="formData">
@@ -136,13 +135,10 @@
                 <label class="checkbox-label" for="location6">
                   <span class="checkbox-icon"></span>Portland
                 </label>
-
-                <span class="error-message" id="error-input"></span>
-
               </fieldset>
 
               <!-- conditions d'utilisation -->
-              <fieldset class="formData">
+              <fieldset class="formData" id="fieldsetheck">
                 <input class="checkbox-input" type="checkbox" id="checkbox1"/>
                 <label class="checkbox2-label" for="checkbox1" required>
                   <span class="checkbox-icon"></span>J'ai lu et accepté les conditions d'utilisation.
@@ -153,10 +149,7 @@
                 <label class="checkbox2-label" for="checkbox2">
                   <span class="checkbox-icon"></span>Je souhaite être prévenu des prochains évènements.
                 </label>
-                <br>
-
-                <span class="error-message" id="error-condition"></span>
-                
+                <br>               
               </fieldset>
 
               <p id="thanks-message">Merci pour votre inscription</p>

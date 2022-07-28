@@ -264,10 +264,6 @@ input {
 }
 
 
-.error-message{
-  font-size : 1rem;
-  color: red;
-}
 
 #error-input, #error-condition{
   display : block;

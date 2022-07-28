@@ -177,32 +177,37 @@ function isEmailValid(){
 
 
 // DATE DE NAISSANCE VALIDE
-
-var birthdateRegex = /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/;
+const birthdateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;
 let birthdate = document.getElementById("birthdate");
-let errorBirthdate = document.getElementById("error-birthdate")
-
 
 // Au click sur l'input
 birthdate.addEventListener("change", function(event) {
+  const formField = birthdate.parentElement;
 
   // Si la valeur récupérée ne correspond pas à nameRegex
   if(!event.target.value.match(birthdateRegex)){
-    errorBirthdate.textContent = "Date de naissance non valide"
+    formField.setAttribute('data-error', 'Date de naissance non valide.');
+    formField.setAttribute('data-error-visible', 'true');
+    return false;
   }
   // Sinon
   else{
-    errorBirthdate.textContent = ""
+    formField.setAttribute('data-error-visible', 'false');
+    return true;
   }  
 });
 
 function isBirthdateValid(){
-  if(!birthdate.match(birthdateRegex)){
-    errorBirthdate.textContent = "Date de naissance non valide"
+  const formField = birthdate.parentElement;
+  if(!birthdate.value.match(birthdateRegex)){
+    formField.setAttribute('data-error', 'Date de naissance non valide.');
+    formField.setAttribute('data-error-visible', 'true');
+    return false;
   }
   // Sinon
   else{
-    errorBirthdate.textContent = ""
+    formField.setAttribute('data-error-visible', 'false');
+    return true;
   }  
 }
 
@@ -216,18 +221,8 @@ function isBirthdateValid(){
 let quantity = document.getElementById("quantity")
 
 // Au click sur l'input
-quantity.addEventListener("change", function(event){
-  const formField = quantity.parentElement;
-  if(isNaN(event.target.value) || event.target.value == ''){
-    formField.setAttribute('data-error', 'Veuillez saisir une valeur numérique.');
-    formField.setAttribute('data-error-visible', 'true');
-    return false;
-  }
-  else{
-    formField.setAttribute('data-error-visible', 'false');
-    return true;
-  }
-})
+quantity.addEventListener("change", isQuantityValid)
+
 
 function isQuantityValid(){
   const formField = quantity.parentElement;
@@ -256,7 +251,7 @@ function isCityValid(){
   for( i = 0; i < city.length; i++){
     if(city[i].checked){
       formField.setAttribute('data-error-visible', 'false');
-      return true;
+      return true; // stoppe l'exécution de la boucle
     }    
   }
    
@@ -270,14 +265,15 @@ function isCityValid(){
 
 function isConditionAccepted(){
   var condition = document.getElementById("checkbox1");
-  let errorCondition = document.getElementById("error-condition");
+  const formField = document.getElementById("fieldsetheck");
  
     if(condition.checked){
-      errorCondition.textContent = "";
+      formField.setAttribute('data-error-visible', 'false');
       return true;  
     }    
     else{
-      errorCondition.textContent = "Veuillez accepter les conditions d'utilisation";
+      formField.setAttribute('data-error', 'Veuillez accepter les conditions d\'utilisation.');
+      formField.setAttribute('data-error-visible', 'true');
       return false;
     }
 }
@@ -288,24 +284,12 @@ function isConditionAccepted(){
 
 function validate(event) {
   event.preventDefault(); // on retire la fonction par défaut de l'envoie du formulaire
+  const isFormValid = isFirstNameValid() || isLastNameValid() || isEmailValid() || isBirthdateValid()
+  || isQuantityValid() || isCityValid() || isConditionAccepted()
   
-  
-  setTimeout(function() {  // on créé un event loop avec set Timeout pour que le code s'exécute en asynchrone
-    isFirstNameValid()
-  }, 0);
-    isLastNameValid(), 0;
-    isEmailValid(), 0;
-    isQuantityValid(), 0;
-    isCityValid(), 0;
-    isConditionAccepted(), 0;
-   
-  
-  if(isFirstNameValid()) {
-    console.log("le formulaire valide ");
-    thanks();
-    
-    
-  return true
+  if(isFormValid) {
+    thanks();   
+    return true
   }
   else{
     return false
