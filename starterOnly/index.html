@@ -20,7 +20,7 @@
 
       <!-- logo -->
       <div class="header-logo">
-        <img alt="logo" src="Logo.png" width="auto" height="auto" />
+        <img alt="logo" src="Logo.png" />
       </div>
 
       <!-- liens -->
@@ -79,19 +79,16 @@
               <fieldset class="formData">
                 <label for="first">Prénom</label><br>
                 <input class="text-control" type="text" id="first" name="first" minlength="2"/><br>
-                <span class="error-message" id="error-firstname"></span>
               </fieldset>
 
               <fieldset class="formData">
                 <label for="last">Nom</label><br>
                 <input class="text-control" type="text" id="last" name="last"/><br>
-                <span class="error-message" id="error-lastname"></span>
               </fieldset>
 
               <fieldset class="formData">
                 <label for="email">E-mail</label><br>
-                <input class="text-control" type="email" id="email" name="email"/><br>
-                <span class="error-message" id="error-email"></span>
+                <input class="text-control" type="email" id="email" name="email" data-error="Adresse email non valide."/><br>
               </fieldset>
 
               <fieldset class="formData">
@@ -103,7 +100,6 @@
               <fieldset class="formData">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input class="text-control" id="quantity" name="quantity" min="0" max="99">
-                <span class="error-message" id="error-quantity"></span>
               </fieldset>
 
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
@@ -182,6 +178,7 @@
     <!-- FOOTER -->
 
     <footer>
+      <button class="btn-signup modal-btn">je m'inscris</button>
       <p class="copyrights">
         Copyright 2014 - 2022, GameOn Inc.
       </p>

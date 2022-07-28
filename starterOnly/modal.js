@@ -39,77 +39,93 @@ function closeModal() {
 var nameRegex = /^[a-zA-Z\-]+$/
 let firstname = document.getElementById("first")
 let lastname = document.getElementById("last")
-let errorFirstname = document.getElementById("error-firstname")
-let errorLastname = document.getElementById("error-lastname")
+
 
 // Au click sur l'input
 firstname.addEventListener("change", function(event) { 
+  const formField = firstname.parentElement;
   // Si la valeur récupérée dans l'input est inférieur à 2
   if(event.target.value.length < 2){
-    errorFirstname.textContent = "Veuillez saisir plus de 2 caractères."
+    formField.setAttribute('data-error', 'Veuillez saisir plus de 2 caractères.');
+    formField.setAttribute('data-error-visible', 'true');
+    return false;
   }
   // Sinon si la valeur récupérée ne correspond pas à nameRegex
   else if(!event.target.value.match(nameRegex)){
-    errorFirstname.textContent = "Les chiffres et caractères spéciaux ne sont pas autorisés."
+    formField.setAttribute('data-error', 'Les chiffres et caractères spéciaux ne sont pas autorisés.');
+    formField.setAttribute('data-error-visible', 'true');
+    return false;
+
   }
   // Sinon
   else{
-    errorFirstname.textContent = ""
+    formField.setAttribute('data-error-visible', 'false');
+    return true;
   }  
 });
 
 
-
 function isFirstNameValid(){
+  const formField = firstname.parentElement;
   if(firstname.value.length < 2){
-    errorFirstname.textContent = "Veuillez saisir plus de 2 caractères.";
+    formField.setAttribute('data-error', 'Veuillez saisir plus de 2 caractères.');
+    formField.setAttribute('data-error-visible', 'true');
     return false;
   }
   // Sinon si la valeur récupérée ne correspond pas à nameRegex
   else if(!firstname.value.match(nameRegex)){
-    errorFirstname.textContent = "Les chiffres et caractères spéciaux ne sont pas autorisés.";
+    formField.setAttribute('data-error', 'Les chiffres et caractères spéciaux ne sont pas autorisés.');
+    formField.setAttribute('data-error-visible', 'true');
     return false;
   }
   // Sinon
   else{
-    errorFirstname.textContent = "";
+    formField.setAttribute('data-error-visible', 'false');
     return true;
   }  
 }
 
+
+
 // Au click sur l'input
 lastname.addEventListener("change", function(event) {
+  const formField = lastname.parentElement;
   // Si la valeur récupérée dans l'input est inférieur à 2
   if(event.target.value.length < 2){
-    errorLastname.textContent = "Veuillez saisir plus de 2 caractères."
+    formField.setAttribute('data-error', 'Veuillez saisir plus de 2 caractères.');
+    formField.setAttribute('data-error-visible', 'true');
     return false;
   }
   // Sinon si la valeur récupérée ne correspond pas à nameRegex
   else if(!event.target.value.match(nameRegex)){
-    errorLastname.textContent = "Les chiffres et caractères spéciaux ne sont pas autorisés."
+    formField.setAttribute('data-error', 'Les chiffres et caractères spéciaux ne sont pas autorisés.');
+    formField.setAttribute('data-error-visible', 'true');
     return false;
   }
   // Sinon
   else{
-    errorLastname.textContent = "";
-    return true
+    formField.setAttribute('data-error-visible', 'false');
+    return true;
   }  
 });
 
 // Fonction qui regroupe nom et prénom
 function isLastNameValid(){
+  const formField = lastname.parentElement;
   if(lastname.value.length < 2){
-    errorLastname.textContent = "Veuillez saisir plus de 2 caractères.";
+    formField.setAttribute('data-error', 'Veuillez saisir plus de 2 caractères.');
+    formField.setAttribute('data-error-visible', 'true');
     return false;
   }
   // Sinon si la valeur récupérée ne correspond pas à nameRegex
   else if(!lastname.value.match(nameRegex)){
-    errorLastname.textContent = "Les chiffres et caractères spéciaux ne sont pas autorisés.";
+    formField.setAttribute('data-error', 'Les chiffres et caractères spéciaux ne sont pas autorisés.');
+    formField.setAttribute('data-error-visible', 'true');
     return false;
   }
   // Sinon
   else{
-    errorLastname.textContent = "";
+    formField.setAttribute('data-error-visible', 'false');
     return true;
   }  
 }
@@ -123,30 +139,35 @@ function isLastNameValid(){
 
 var emailRegex = /^([a-zA-Z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
 let email = document.getElementById("email")
-let errorEmail = document.getElementById("error-email")
+
 
 // Au click sur l'input
 email.addEventListener("change", function(event) {
-
+  const formField = email.parentElement;
   // Si la valeur récupérée ne correspond pas à nameRegex
   if(!event.target.value.match(emailRegex)){
-    errorEmail.textContent = "Adresse email non valide"
+    formField.setAttribute('data-error', 'Adresse email non valide.');
+    formField.setAttribute('data-error-visible', 'true');
+    return false;
   }
   // Sinon
   else{
-    errorEmail.textContent = ""
+    formField.setAttribute('data-error-visible', 'false');
+    return true;
   }  
 });
 
 
 function isEmailValid(){
+  const formField = email.parentElement;
   if(!email.value.match(emailRegex)){
-    errorEmail.textContent = "Adresse email non valide";
+    formField.setAttribute('data-error', 'Adresse email non valide.');
+    formField.setAttribute('data-error-visible', 'true');
     return false;
   }
   // Sinon
   else{
-    errorEmail.textContent = "";
+    formField.setAttribute('data-error-visible', 'false');
     return true;
   }  
 }
@@ -193,25 +214,30 @@ function isBirthdateValid(){
 // NOMBRE DE TOURNOI VALIDE 
 
 let quantity = document.getElementById("quantity")
-let errorQuantity = document.getElementById("error-quantity")
 
 // Au click sur l'input
 quantity.addEventListener("change", function(event){
+  const formField = quantity.parentElement;
   if(isNaN(event.target.value) || event.target.value == ''){
-    errorQuantity.textContent = "Veuillez saisir une valeur numérique.";
+    formField.setAttribute('data-error', 'Veuillez saisir une valeur numérique.');
+    formField.setAttribute('data-error-visible', 'true');
+    return false;
   }
   else{
-    errorQuantity.textContent = ""
+    formField.setAttribute('data-error-visible', 'false');
+    return true;
   }
 })
 
 function isQuantityValid(){
+  const formField = quantity.parentElement;
   if(isNaN(quantity.value) || quantity.value == ''){
-    errorQuantity.textContent = "Veuillez saisir une valeur numérique.";
+    formField.setAttribute('data-error', 'Veuillez saisir une valeur numérique.');
+    formField.setAttribute('data-error-visible', 'true');
     return false;
   }
   else{
-    errorQuantity.textContent = "";
+    formField.setAttribute('data-error-visible', 'false');
     return true;
   }
 }
@@ -223,20 +249,20 @@ function isQuantityValid(){
 // CHOIX DE VILLE VALIDE 
 
 var city = document.querySelectorAll("input[type=radio]");
-let errorInput = document.getElementById("error-input");
-
 
 function isCityValid(){
+  const formField = document.getElementById("fieldset-checkbox");
 
   for( i = 0; i < city.length; i++){
     if(city[i].checked){
-      errorInput.textContent = "";
+      formField.setAttribute('data-error-visible', 'false');
       return true;
     }    
   }
    
   // attention : dans une boucle, on ne met pas de else, on met le reste de la condition en dehors de la boucle.
-  errorInput.textContent = "Sélectionner au moins une ville";
+  formField.setAttribute('data-error', 'Veuillez cocher au moins une ville.');
+  formField.setAttribute('data-error-visible', 'true');
   return false;
 }
 
