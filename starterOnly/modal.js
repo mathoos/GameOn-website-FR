@@ -33,103 +33,60 @@ function closeModal() {
 
 
 
-
 // NOM & PRENOM VALIDES
 
-var nameRegex = /^[a-zA-Z\-]+$/
+var nameRegex = /^[a-zéèàùûêâôëA-Z\'-]+$/
 let firstname = document.getElementById("first")
 let lastname = document.getElementById("last")
 
-
-// Au click sur l'input
-firstname.addEventListener("change", function(event) { 
-  const formField = firstname.parentElement;
-  // Si la valeur récupérée dans l'input est inférieur à 2
-  if(event.target.value.length < 2){
-    formField.setAttribute('data-error', 'Veuillez saisir plus de 2 caractères.');
-    formField.setAttribute('data-error-visible', 'true');
-    return false;
-  }
-  // Sinon si la valeur récupérée ne correspond pas à nameRegex
-  else if(!event.target.value.match(nameRegex)){
-    formField.setAttribute('data-error', 'Les chiffres et caractères spéciaux ne sont pas autorisés.');
-    formField.setAttribute('data-error-visible', 'true');
-    return false;
-
-  }
-  // Sinon
-  else{
-    formField.setAttribute('data-error-visible', 'false');
-    return true;
-  }  
-});
-
-
+firstname.addEventListener("change", isFirstNameValid)
 function isFirstNameValid(){
+  let firstnameWithoutSpace = firstname.value.trim(); // la méthode trim() permet de supprimer les espaces en début et fin de chaîne
   const formField = firstname.parentElement;
-  if(firstname.value.length < 2){
+  
+  if(firstnameWithoutSpace.length < 2){
     formField.setAttribute('data-error', 'Veuillez saisir plus de 2 caractères.');
     formField.setAttribute('data-error-visible', 'true');
     return false;
   }
   // Sinon si la valeur récupérée ne correspond pas à nameRegex
-  else if(!firstname.value.match(nameRegex)){
+  else if(!firstnameWithoutSpace.match(nameRegex)){
     formField.setAttribute('data-error', 'Les chiffres et caractères spéciaux ne sont pas autorisés.');
     formField.setAttribute('data-error-visible', 'true');
     return false;
   }
   // Sinon
   else{
+    console.log(firstnameWithoutSpace);
+    firstname.value = firstnameWithoutSpace;  // on affiche l'input sans les espaces en début et fin de chaîne
     formField.setAttribute('data-error-visible', 'false');
-    return true;
+    return true;   
   }  
 }
 
-
-
-// Au click sur l'input
-lastname.addEventListener("change", function(event) {
-  const formField = lastname.parentElement;
-  // Si la valeur récupérée dans l'input est inférieur à 2
-  if(event.target.value.length < 2){
-    formField.setAttribute('data-error', 'Veuillez saisir plus de 2 caractères.');
-    formField.setAttribute('data-error-visible', 'true');
-    return false;
-  }
-  // Sinon si la valeur récupérée ne correspond pas à nameRegex
-  else if(!event.target.value.match(nameRegex)){
-    formField.setAttribute('data-error', 'Les chiffres et caractères spéciaux ne sont pas autorisés.');
-    formField.setAttribute('data-error-visible', 'true');
-    return false;
-  }
-  // Sinon
-  else{
-    formField.setAttribute('data-error-visible', 'false');
-    return true;
-  }  
-});
-
-// Fonction qui regroupe nom et prénom
+lastname.addEventListener("change", isLastNameValid)
 function isLastNameValid(){
+  let lastnameWithoutSpace = lastname.value.trim();  // la méthode trim() permet de supprimer les espaces en début et fin de chaîne
   const formField = lastname.parentElement;
-  if(lastname.value.length < 2){
+  if(lastnameWithoutSpace.length < 2){
     formField.setAttribute('data-error', 'Veuillez saisir plus de 2 caractères.');
     formField.setAttribute('data-error-visible', 'true');
     return false;
   }
   // Sinon si la valeur récupérée ne correspond pas à nameRegex
-  else if(!lastname.value.match(nameRegex)){
+  else if(!lastnameWithoutSpace.match(nameRegex)){
     formField.setAttribute('data-error', 'Les chiffres et caractères spéciaux ne sont pas autorisés.');
     formField.setAttribute('data-error-visible', 'true');
     return false;
   }
   // Sinon
   else{
+    console.log(lastnameWithoutSpace);
+    lastname.value = lastnameWithoutSpace; // on affiche l'input sans les espaces en début et fin de chaîne
     formField.setAttribute('data-error-visible', 'false');
     return true;
   }  
 }
-
 
 
 
@@ -140,24 +97,7 @@ function isLastNameValid(){
 var emailRegex = /^([a-zA-Z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
 let email = document.getElementById("email")
 
-
-// Au click sur l'input
-email.addEventListener("change", function(event) {
-  const formField = email.parentElement;
-  // Si la valeur récupérée ne correspond pas à nameRegex
-  if(!event.target.value.match(emailRegex)){
-    formField.setAttribute('data-error', 'Adresse email non valide.');
-    formField.setAttribute('data-error-visible', 'true');
-    return false;
-  }
-  // Sinon
-  else{
-    formField.setAttribute('data-error-visible', 'false');
-    return true;
-  }  
-});
-
-
+email.addEventListener("change", isEmailValid)
 function isEmailValid(){
   const formField = email.parentElement;
   if(!email.value.match(emailRegex)){
@@ -180,23 +120,7 @@ function isEmailValid(){
 const birthdateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;
 let birthdate = document.getElementById("birthdate");
 
-// Au click sur l'input
-birthdate.addEventListener("change", function(event) {
-  const formField = birthdate.parentElement;
-
-  // Si la valeur récupérée ne correspond pas à nameRegex
-  if(!event.target.value.match(birthdateRegex)){
-    formField.setAttribute('data-error', 'Date de naissance non valide.');
-    formField.setAttribute('data-error-visible', 'true');
-    return false;
-  }
-  // Sinon
-  else{
-    formField.setAttribute('data-error-visible', 'false');
-    return true;
-  }  
-});
-
+birthdate.addEventListener("change", isBirthdateValid)
 function isBirthdateValid(){
   const formField = birthdate.parentElement;
   if(!birthdate.value.match(birthdateRegex)){
@@ -220,10 +144,7 @@ function isBirthdateValid(){
 
 let quantity = document.getElementById("quantity")
 
-// Au click sur l'input
 quantity.addEventListener("change", isQuantityValid)
-
-
 function isQuantityValid(){
   const formField = quantity.parentElement;
   if(isNaN(quantity.value) || quantity.value == ''){
@@ -263,6 +184,8 @@ function isCityValid(){
 
 
 
+// ACCEPTER LES CONDITIONS D'UTILISATION
+
 function isConditionAccepted(){
   var condition = document.getElementById("checkbox1");
   const formField = document.getElementById("fieldsetheck");
@@ -282,36 +205,53 @@ function isConditionAccepted(){
 
 // VALIDER LE FORMULAIRE
 
-function validate(event) {
+let form = document.querySelector("form");
+
+
+
+form.addEventListener("submit", function(event){
+
+  const invalidName = false;
+
+
   event.preventDefault(); // on retire la fonction par défaut de l'envoie du formulaire
   const isFormValid = isFirstNameValid() || isLastNameValid() || isEmailValid() || isBirthdateValid()
   || isQuantityValid() || isCityValid() || isConditionAccepted()
+
+  /*setTimeout(function() {  // on créé un event loop avec set Timeout pour que le code s'exécute en asynchrone
+    isFirstNameValid()
+  }, 0);
+    isLastNameValid(), 0;
+    isEmailValid(), 0;
+    isQuantityValid(), 0;
+    isCityValid(), 0;
+    isConditionAccepted(), 0;*/
+   
   
-  if(isFormValid) {
-    thanks();   
-    return true
-  }
-  else{
+  if(isFormValid == false){ 
     return false
   }
-}
+  else{
+    thanks();
+    return true
+
+  }
+})
+
+
 
 
 // AFFICHER LE MESSAGE DE REMERCIEMENT
 
 function thanks(){
-  let form = document.querySelectorAll("form fieldset, form p");
-  let formBtn = document.getElementById("formBtn");
-  let msgThanks = document.getElementById("thanks-message");
+  
+  let thanks = document.getElementById("thanks");
+  let closeForm = document.getElementById("closeForm");
 
 
-  for( elements of form){
-    elements.style.visibility = "hidden"
-  }  
-
-  formBtn.value = "fermer";
-  formBtn.addEventListener("click", (closeModal))
-  msgThanks.style.visibility = "visible"
+  form.style.display = "none";
+  thanks.style.display = "block";
+  closeForm.addEventListener("click", (closeModal))
 }
 
 

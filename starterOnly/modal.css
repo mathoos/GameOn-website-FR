@@ -160,12 +160,14 @@ footer .btn-signup {
 
 .button {
   background: #fe142f;
-  margin-top: 0.5em;
-  padding: 1em;
+  display: block;
+  margin: 0 auto;
+  border-radius: 7px;
+  font-size: 1rem;
+  padding: 12px 82px;
   color: #fff;
-  border-radius: 15px;
   cursor: pointer;
-  font-size: 16px;
+  border: 0;
 }
 
 .button:hover {
@@ -236,6 +238,27 @@ footer .btn-signup {
 .modal-body {
   padding: 15px 8%;
   margin: 15px auto;
+}
+
+#thanks{
+  display : none;
+}
+
+#thanks p{
+  margin: 30vh 0;
+  text-align : center;
+}
+
+#closeForm{
+  background: #fe142f;
+  display: block;
+  margin: 0 auto;
+  border-radius: 7px;
+  font-size: 1rem;
+  padding: 12px 82px;
+  color: #fff;
+  cursor: pointer;
+  border: 0;
 }
 
 fieldset{

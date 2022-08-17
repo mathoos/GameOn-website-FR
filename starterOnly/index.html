@@ -72,7 +72,7 @@
 
             <!-- formulaire-->
 
-            <form name="reserve" action="index.html" method="get" onsubmit="return validate(event);">
+            <form name="reserve" action="index.html" method="get">
 
 
               <!-- informations utilisateur -->
@@ -98,7 +98,7 @@
 
               <fieldset class="formData">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
-                <input class="text-control" id="quantity" name="quantity" min="0" max="99">
+                <input class="text-control" type="number" id="quantity" name="quantity" min="0" max="99">
               </fieldset>
 
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
@@ -151,13 +151,17 @@
                 </label>
                 <br>               
               </fieldset>
-
-              <p id="thanks-message">Merci pour votre inscription</p>
-
+              
               <!-- bouton envoi formulaire -->
               <input class="btn-submit button" id="formBtn" type="submit" value="C'est parti"/>
 
             </form>
+
+            <div id="thanks">
+              <p>Merci pour <br> votre inscription</p>
+              <button class="close-button" id="closeForm">Fermer</button>
+            </div>
+         
 
           </div>
         </div>
