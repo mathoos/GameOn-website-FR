@@ -91,7 +91,6 @@ function isLastNameValid(){
 
 
 
-
 // EMAIL VALIDE
 
 var emailRegex = /^([a-zA-Z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
@@ -111,7 +110,6 @@ function isEmailValid(){
     return true;
   }  
 }
-
 
 
 
@@ -138,8 +136,6 @@ function isBirthdateValid(){
 
 
 
-
-
 // NOMBRE DE TOURNOI VALIDE 
 
 let quantity = document.getElementById("quantity")
@@ -157,8 +153,6 @@ function isQuantityValid(){
     return true;
   }
 }
-
-
 
 
 
@@ -207,34 +201,21 @@ function isConditionAccepted(){
 
 let form = document.querySelector("form");
 
-
-
 form.addEventListener("submit", function(event){
-
-  const invalidName = false;
-
-
   event.preventDefault(); // on retire la fonction par défaut de l'envoie du formulaire
-  const isFormValid = isFirstNameValid() || isLastNameValid() || isEmailValid() || isBirthdateValid()
-  || isQuantityValid() || isCityValid() || isConditionAccepted()
-
-  /*setTimeout(function() {  // on créé un event loop avec set Timeout pour que le code s'exécute en asynchrone
-    isFirstNameValid()
-  }, 0);
-    isLastNameValid(), 0;
-    isEmailValid(), 0;
-    isQuantityValid(), 0;
-    isCityValid(), 0;
-    isConditionAccepted(), 0;*/
-   
   
-  if(isFormValid == false){ 
-    return false
+  if(isFirstNameValid() && isLastNameValid() && isEmailValid() && isBirthdateValid() 
+    && isQuantityValid() && isCityValid() && isConditionAccepted()){ 
+    thanks()
   }
   else{
-    thanks();
-    return true
-
+    isFirstNameValid();
+    isLastNameValid();
+    isEmailValid();
+    isBirthdateValid();
+    isQuantityValid();
+    isCityValid();
+    isConditionAccepted();
   }
 })
 
@@ -247,7 +228,6 @@ function thanks(){
   
   let thanks = document.getElementById("thanks");
   let closeForm = document.getElementById("closeForm");
-
 
   form.style.display = "none";
   thanks.style.display = "block";
