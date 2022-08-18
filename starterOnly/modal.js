@@ -35,18 +35,20 @@ function closeModal() {
 
 // NOM & PRENOM VALIDES
 
-var nameRegex = /^[a-zéèàùûêâôëA-Z\'-]+$/
+var nameRegex = /^[a-zéèàùûêâôëA-Z\'-]+$/  // expression régulière qui indique quels caractères sont autorisés
 let firstname = document.getElementById("first")
 let lastname = document.getElementById("last")
 
-firstname.addEventListener("change", isFirstNameValid)
+firstname.addEventListener("change", isFirstNameValid) // quand l'utilisateur clique ailleurs que sur l'input
 function isFirstNameValid(){
+  // créer une variable qui contient la valeur saisie par l'utilisateur sans les espaces en début et fin de chaîne
   let firstnameWithoutSpace = firstname.value.trim(); // la méthode trim() permet de supprimer les espaces en début et fin de chaîne
   const formField = firstname.parentElement;
   
+  // Si la longueur de la valeur est inférieure à 2 caractères -> message d'erreur 
   if(firstnameWithoutSpace.length < 2){
-    formField.setAttribute('data-error', 'Veuillez saisir plus de 2 caractères.');
-    formField.setAttribute('data-error-visible', 'true');
+    formField.setAttribute('data-error', 'Veuillez saisir plus de 2 caractères.'); // on ajoute l'attribut data-error qui affiche le message d'erreur
+    formField.setAttribute('data-error-visible', 'true'); // on ajoute l'attribut date-error-visible qui retourne true (l'input aura un border red)
     return false;
   }
   // Sinon si la valeur récupérée ne correspond pas à nameRegex
@@ -58,11 +60,13 @@ function isFirstNameValid(){
   // Sinon
   else{
     console.log(firstnameWithoutSpace);
-    firstname.value = firstnameWithoutSpace;  // on affiche l'input sans les espaces en début et fin de chaîne
-    formField.setAttribute('data-error-visible', 'false');
+    firstname.value = firstnameWithoutSpace;  // on affiche l'input la valeur sans les espaces en début et fin de chaîne
+    formField.setAttribute('data-error-visible', 'false'); // on met l'attribut data-error-visible en false pour retirer les border
     return true;   
   }  
 }
+
+
 
 lastname.addEventListener("change", isLastNameValid)
 function isLastNameValid(){
@@ -143,8 +147,15 @@ let quantity = document.getElementById("quantity")
 quantity.addEventListener("change", isQuantityValid)
 function isQuantityValid(){
   const formField = quantity.parentElement;
+  // Si la valeur saisie ne correspont pas à un nombre ou si le champ reste vide -> message erreur
   if(isNaN(quantity.value) || quantity.value == ''){
     formField.setAttribute('data-error', 'Veuillez saisir une valeur numérique.');
+    formField.setAttribute('data-error-visible', 'true');
+    return false;
+  }
+  // Sinon si la valeur saisie est inférieure à 0 (nombre négatif) -> message erreur
+  else if(quantity.value < 0){
+    formField.setAttribute('data-error', 'Les chiffres négatifs ne sont pas autorisés.');
     formField.setAttribute('data-error-visible', 'true');
     return false;
   }
@@ -163,6 +174,7 @@ var city = document.querySelectorAll("input[type=radio]");
 function isCityValid(){
   const formField = document.getElementById("fieldset-checkbox");
 
+  // on fait une boucle qui parcourt l'ensemble des boutons radio
   for( i = 0; i < city.length; i++){
     if(city[i].checked){
       formField.setAttribute('data-error-visible', 'false');
@@ -183,7 +195,7 @@ function isCityValid(){
 function isConditionAccepted(){
   var condition = document.getElementById("checkbox1");
   const formField = document.getElementById("fieldsetheck");
- 
+    //Si l'input est coché -> l'attribut data-error-visible est false
     if(condition.checked){
       formField.setAttribute('data-error-visible', 'false');
       return true;  
@@ -201,13 +213,17 @@ function isConditionAccepted(){
 
 let form = document.querySelector("form");
 
+// On fait un addEventListener sur le form pour passer la fonction de validation du formulaire dès que l'utilisateur clique sur le bouton submit
 form.addEventListener("submit", function(event){
   event.preventDefault(); // on retire la fonction par défaut de l'envoie du formulaire
   
+  // Si toutes les fonctions retournent true -> on passe la fonction thanks()
   if(isFirstNameValid() && isLastNameValid() && isEmailValid() && isBirthdateValid() 
     && isQuantityValid() && isCityValid() && isConditionAccepted()){ 
     thanks()
   }
+
+  // Sinon, on retourne les fonctions pour qu'elles retournent leur message d'erreur
   else{
     isFirstNameValid();
     isLastNameValid();
