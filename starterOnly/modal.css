@@ -52,7 +52,7 @@ p {
 }
 .topnav{
 }
-.topnav a {
+.topnav a, .topnav button {
   float: left;
   display: block;
   color: #000000;
@@ -64,7 +64,7 @@ p {
   font-family: Roboto, sans-serif;
 }
 
-.topnav a:hover {
+.topnav a:hover, .topnav button:hover {
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
@@ -90,7 +90,7 @@ p {
   .topnav a {
     display: none;
   }
-  .topnav a.icon {
+  .topnav button.icon {
     display: block;
   }
 }
@@ -102,7 +102,6 @@ p {
     flex-direction: column;
     align-items: flex-end;
     width : 100%;
-    border : 1px solid orange;
   }
   .topnav.responsive {
     position: relative;
@@ -123,7 +122,7 @@ p {
 
  @media screen and (max-width: 540px) {
   .topnav a {display: none;}
-  .topnav a.icon {
+  .topnav button.icon {
     /*float: right;*/
     display: block;
     width : fit-content;

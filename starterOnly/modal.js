@@ -1,3 +1,7 @@
+// Ouvrir le burger menu en version mobile
+const burgerMenu = document.getElementById("burger-menu")
+burgerMenu.addEventListener("click", editNav)
+
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
