@@ -11,28 +11,33 @@ function editNav() {
   }
 }
 
-
-// DOM Elements
-const modalbg = document.querySelector(".bground");
+// Ouvrir le formulaire 
 const modalBtn = document.querySelectorAll(".modal-btn");
-const formData = document.querySelectorAll(".formData");
-const btnClose = document.getElementById("closeModal");
-const content = document.getElementById("content");
 
-// launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-
-// launch modal form
 function launchModal() {
   modalbg.style.display = "block";
 }
 
-// close modal
-btnClose.addEventListener("click", closeModal);
+// Fermer le formulaire en cliquant sur la X
+const btnClose = document.getElementById("closeModal");
+const modalbg = document.querySelector(".bground");
 
+btnClose.addEventListener("click", closeModal);
 function closeModal() {
   modalbg.style.display = "none";
 }
+
+
+
+// DOM Elements
+
+
+const formData = document.querySelectorAll(".formData");
+const content = document.getElementById("content");
+
+
+
 
 
 
