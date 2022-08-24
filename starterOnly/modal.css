@@ -302,13 +302,6 @@ input {
   height: 48px;
 }
 
-
-
-#error-input, #error-condition{
-  display : block;
-  margin-bottom : 20px;
-}
-
 .formData[data-error]::after {
   display : block;
   content: attr(data-error);

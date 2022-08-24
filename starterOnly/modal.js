@@ -4,7 +4,7 @@ burgerMenu.addEventListener("click", editNav)
 
 function editNav() {
   var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
+  if (x.className === "topnav") { // Si la topnav a la class .topnav
     x.className += " responsive";
   } else {
     x.className = "topnav";
@@ -37,11 +37,6 @@ const formData = document.querySelectorAll(".formData");
 const content = document.getElementById("content");
 
 
-
-
-
-
-
 // NOM & PRENOM VALIDES
 
 var nameRegex = /^[a-zéèàùûêâôëA-Z\'-]+$/  // expression régulière qui indique quels caractères sont autorisés
@@ -68,8 +63,8 @@ function isFirstNameValid(){
   }
   // Sinon
   else{
-    console.log(firstnameWithoutSpace);
     firstname.value = firstnameWithoutSpace;  // on affiche l'input la valeur sans les espaces en début et fin de chaîne
+    formField.removeAttribute('data-error');
     formField.setAttribute('data-error-visible', 'false'); // on met l'attribut data-error-visible en false pour retirer les border
     return true;   
   }  
@@ -94,8 +89,8 @@ function isLastNameValid(){
   }
   // Sinon
   else{
-    console.log(lastnameWithoutSpace);
     lastname.value = lastnameWithoutSpace; // on affiche l'input sans les espaces en début et fin de chaîne
+    formField.removeAttribute('data-error');
     formField.setAttribute('data-error-visible', 'false');
     return true;
   }  
@@ -120,6 +115,7 @@ function isEmailValid(){
   // Sinon
   else{
     formField.setAttribute('data-error-visible', 'false');
+    formField.removeAttribute('data-error');
     return true;
   }  
 }
@@ -142,6 +138,7 @@ function isBirthdateValid(){
   // Sinon
   else{
     formField.setAttribute('data-error-visible', 'false');
+    formField.removeAttribute('data-error');
     return true;
   }  
 }
@@ -170,6 +167,7 @@ function isQuantityValid(){
   }
   else{
     formField.setAttribute('data-error-visible', 'false');
+    formField.removeAttribute('data-error');
     return true;
   }
 }
@@ -187,7 +185,8 @@ function isCityValid(){
   for( i = 0; i < city.length; i++){
     if(city[i].checked){
       formField.setAttribute('data-error-visible', 'false');
-      return true; // stoppe l'exécution de la boucle
+      formField.removeAttribute('data-error');
+      return true; // stoppe l'exécution de la 
     }    
   }
    
@@ -205,14 +204,16 @@ function isConditionAccepted(){
   var condition = document.getElementById("checkbox1");
   const formField = document.getElementById("fieldsetheck");
     //Si l'input est coché -> l'attribut data-error-visible est false
-    if(condition.checked){
-      formField.setAttribute('data-error-visible', 'false');
-      return true;  
-    }    
-    else{
+    if(!condition.checked){
       formField.setAttribute('data-error', 'Veuillez accepter les conditions d\'utilisation.');
       formField.setAttribute('data-error-visible', 'true');
       return false;
+       
+    }    
+    else{
+      formField.setAttribute('data-error-visible', 'false');
+      formField.removeAttribute('data-error');
+      return true; 
     }
 }
   
