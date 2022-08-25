@@ -11,6 +11,8 @@ function editNav() {
   }
 }
 
+
+
 // Ouvrir le formulaire 
 const modalBtn = document.querySelectorAll(".modal-btn");
 
@@ -42,6 +44,7 @@ const content = document.getElementById("content");
 var nameRegex = /^[a-zéèàùûêâôëA-Z\'-]+$/  // expression régulière qui indique quels caractères sont autorisés
 let firstname = document.getElementById("first")
 let lastname = document.getElementById("last")
+
 
 firstname.addEventListener("change", isFirstNameValid) // quand l'utilisateur clique ailleurs que sur l'input
 function isFirstNameValid(){
@@ -228,23 +231,18 @@ form.addEventListener("submit", function(event){
   event.preventDefault(); // on retire la fonction par défaut de l'envoie du formulaire
   
   // Si toutes les fonctions retournent true -> on passe la fonction thanks()
-  if(isFirstNameValid() && isLastNameValid() && isEmailValid() && isBirthdateValid() 
-    && isQuantityValid() && isCityValid() && isConditionAccepted()){ 
+  var firstnamevalid = isFirstNameValid();
+  var lastnamevalid = isLastNameValid();
+  var mailvalid = isEmailValid();
+  var birthdatevalid = isBirthdateValid();
+  var quantityvalid = isQuantityValid();
+  var cityvalid = isCityValid();
+  var conditionvalid = isConditionAccepted();
+
+  if(firstnamevalid && lastnamevalid &&mailvalid && birthdatevalid && quantityvalid && cityvalid && conditionvalid){ 
     thanks()
   }
-
-  // Sinon, on retourne les fonctions pour qu'elles retournent leur message d'erreur
-  else{
-    isFirstNameValid();
-    isLastNameValid();
-    isEmailValid();
-    isBirthdateValid();
-    isQuantityValid();
-    isCityValid();
-    isConditionAccepted();
-  }
 })
-
 
 
 
